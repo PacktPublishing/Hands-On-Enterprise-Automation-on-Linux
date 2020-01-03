@@ -1,0 +1,11 @@
+---
+- name: Deploy new code
+  template:
+    src: templates/web.html.j2
+    dest: /var/www/html/web.html
+  failed_when: true
+
+- name: Restart web server
+  service:
+    name: nginx
+    state: restarted

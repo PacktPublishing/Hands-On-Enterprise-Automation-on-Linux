@@ -1,0 +1,21 @@
+---
+- name: Copy sample database to server
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/
+  loop:
+    - files/test_db/employees.sql
+    - files/test_db/load_departments.dump
+    - files/test_db/load_employees.dump
+    - files/test_db/load_dept_emp.dump
+    - files/test_db/load_dept_manager.dump
+    - files/test_db/load_titles.dump
+    - files/test_db/load_salaries1.dump
+    - files/test_db/load_salaries2.dump
+    - files/test_db/load_salaries3.dump
+    - files/test_db/show_elapsed.sql
+
+- name: Load sample data into database
+  shell: "mysql -u root --password={{ mariadb_root_password }} < /tmp/employees.sql"
+  args:
+    chdir: /tmp

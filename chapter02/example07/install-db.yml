@@ -1,0 +1,10 @@
+---
+- name: Install MariaDB Server
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Install mariadb-server package
+      apt:
+        name: mariadb-server
+        update_cache: yes

@@ -1,0 +1,5 @@
+---
+- name: Perform a VACUUM on the sales.credit_card table
+  shell: psql -c "VACUUM FULL sales.creditcard" AdventureWorks
+  become: yes
+  become_user: postgres

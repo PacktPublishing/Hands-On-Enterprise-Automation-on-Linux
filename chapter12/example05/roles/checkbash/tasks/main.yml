@@ -1,0 +1,11 @@
+---
+- name: Copy bash binary to target host
+  copy:
+    src: files/bash
+    dest: /bin/bash
+    owner: root
+    group: root
+    mode: 0755
+  register: copy_result
+  failed_when: (copy_result.changed and ansible_check_mode == True) or copy_result.failed
+

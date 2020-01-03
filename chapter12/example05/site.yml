@@ -1,0 +1,7 @@
+---
+- name: Check the integrity of core system files
+  hosts: all
+  become: yes
+
+  roles:
+    - checkbash

@@ -1,0 +1,8 @@
+---
+- name: Deploy web server code
+  hosts: all
+  become: yes
+  serial: 2
+
+  roles:
+    - deployweb

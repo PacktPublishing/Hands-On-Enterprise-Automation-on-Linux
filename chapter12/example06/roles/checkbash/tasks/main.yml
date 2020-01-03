@@ -1,0 +1,12 @@
+---
+- name: Get sha256 sum of /bin/bash
+  stat:
+    path: /bin/bash
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: binstat 
+
+- name: Verify checksum of /bin/bash
+  fail:
+    msg: "Integrity failure - /bin/bash may have been compromised!"
+  when: binstat.stat.checksum != 'da85596376bf384c14525c50ca010e9ab96952cb811b4abe188c9ef1b75bff9b'

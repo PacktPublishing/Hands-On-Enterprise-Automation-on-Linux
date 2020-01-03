@@ -1,0 +1,48 @@
+---
+# tasks file for cleanup
+- name: Clean out yum cache
+  shell: yum clean all
+
+- name: Stop syslog
+  shell: service rsyslog stop
+
+- name: Force log rotation
+  shell: /sbin/logrotate -f /etc/logrotate.conf
+  ignore_errors: yes
+
+- name: Clean out logs
+  shell: /bin/rm -f /var/log/*-???????? /var/log/*.gz /var/log/*.[0-9] /var/log/**/*.gz /var/log/**/*.[0-9]
+
+- name: Truncate log files
+  shell: truncate -s 0 /var/log/*.log
+
+- name: Truncate more logs
+  shell: truncate -s 0 /var/log/**/*.log
+
+- name: Clear the audit log
+  shell: /bin/cat /dev/null > /var/log/audit/audit.log
+
+- name: Clear wtmp
+  shell: /bin/cat /dev/null > /var/log/wtmp
+
+- name: Remove the udev persistent device rules
+  shell: /bin/rm -f /etc/udev/rules.d/70*
+
+- name: Remove network related MAC addresses and UUID's
+  shell: /bin/sed -i '/^\(HWADDR\|UUID\)=/d' /etc/sysconfig/network-scripts/ifcfg-enp0s3
+
+- name: Clear out /tmp
+  shell: /bin/rm -rf /tmp/* /var/tmp/*
+
+- name: Remove user history
+  shell: /bin/rm -f ~root/.bash_history /home/**/.bash_history
+
+- name: Remove any viminfo files
+  shell: rm -f /root/.viminfo /home/**/.viminfo
+
+- name: Remove .ssh directories
+  shell: rm -rf ~root/.ssh m -rf /home/**/.ssh
+
+- name: Remove SSH keys and shut down the VM (this kills SSH connection)
+  shell: /bin/rm -f /etc/ssh/*key* && shutdown -h now
+  ignore_errors: yes

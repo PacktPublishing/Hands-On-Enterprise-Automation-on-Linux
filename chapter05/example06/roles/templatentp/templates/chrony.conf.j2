@@ -1,0 +1,13 @@
+pool {{ ntpserver }} iburst maxsources 4
+
+keyfile /etc/chrony/chrony.keys
+
+driftfile /var/lib/chrony/chrony.drift
+
+logdir /var/log/chrony
+
+maxupdateskew 100.0
+
+rtcsync
+
+makestep 1 3

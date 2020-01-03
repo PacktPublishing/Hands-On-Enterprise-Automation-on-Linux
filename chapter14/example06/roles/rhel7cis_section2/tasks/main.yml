@@ -1,0 +1,10 @@
+---
+- name: 2.2.1.1 Ensure time synchronization is in use (Not Scored - L1S L1W)
+  yum:
+    name: chrony
+    state: present
+
+- name: 2.2.1.1 Ensure time synchronization is in use (Not Scored - L1S L1W)
+  service:
+    name: chronyd
+    state: started

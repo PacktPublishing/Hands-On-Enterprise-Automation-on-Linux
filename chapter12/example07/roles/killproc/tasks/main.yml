@@ -1,0 +1,28 @@
+---
+- name: Get PID's of running processes matching {{ procname }}
+  shell: "ps -ef | grep -w {{ procname }} | grep -v grep | grep -v ansible | awk '{print $2\",\"$8}'"
+  register: process_ids
+
+- name: Attempt to kill processes nicely
+  shell: "kill {{ item.split(',')[0] }}"
+  loop:
+    "{{ process_ids.stdout_lines }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Wait for processes to exit
+  wait_for:
+    path: "/proc/{{ item.split(',')[0] }}"
+    timeout: 5
+    state: absent
+  loop: 
+    "{{ process_ids.stdout_lines }}"
+  ignore_errors: yes
+  register: exit_results
+
+- name: Forcefully kill stuck processes
+  shell: "kill -9 {{ item.item.split(',')[0] }}"
+  loop:
+    "{{ exit_results.results | selectattr('failed') | list }}"
+  loop_control:
+    label: "{{ item.item }}"

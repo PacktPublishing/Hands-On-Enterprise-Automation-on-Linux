@@ -1,0 +1,7 @@
+[test]
+testhost1
+testhost2
+
+[test:vars]
+ansible_user=bob
+http_port=8080

@@ -1,0 +1,13 @@
+---
+- name: Run example roles
+  hosts: all
+  become: yes
+
+  roles:
+    - filecopyexample
+    - packageinstall
+    - templatentp
+    - installbzip2
+    - securesshd
+    - checkbzip2
+    - checksshdroot

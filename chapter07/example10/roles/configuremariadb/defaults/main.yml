@@ -1,0 +1,4 @@
+---
+mariadb_bind_address: "127.0.0.1"
+mariadb_port: "3306"
+mariadb_max_binlog_size: "100M"

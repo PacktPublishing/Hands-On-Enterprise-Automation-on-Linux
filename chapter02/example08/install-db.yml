@@ -1,0 +1,7 @@
+---
+- name: Install MariaDB Server
+  hosts: localhost
+  become: true
+
+  roles:
+    - install-mariadb

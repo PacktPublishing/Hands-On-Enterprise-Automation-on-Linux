@@ -1,0 +1,7 @@
+---
+- name: Install Duplicati
+  hosts: all
+  become: yes
+
+  roles:
+    - installduplicati

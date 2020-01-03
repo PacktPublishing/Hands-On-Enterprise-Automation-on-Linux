@@ -1,0 +1,7 @@
+---
+- name: Test and implement CIS benchmarks - section 2
+  hosts: all
+  become: yes
+
+  roles:
+    - rhel7cis_section2

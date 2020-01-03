@@ -1,0 +1,14 @@
+---
+- name: Install the epel-release package
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install cloud-init and docker
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cloud-init
+    - docker
+

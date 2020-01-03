@@ -1,0 +1,13 @@
+---
+- name: Add required users to Linux servers
+  user:
+    name: "{{ item.name }}" 
+    comment: "{{ item.comment }}"
+    shell: /bin/bash
+    groups: "{{ item.groups }}"
+    append: yes
+    state: present
+  loop:
+    - { name: 'johndoe', comment: 'John Doe', groups: 'sudo'}
+    - { name: 'janedoe', comment: 'Jane Doe', groups: 'docker'}
+

@@ -1,0 +1,37 @@
+---
+- name: Install the MariaDB Python module required by Ansible
+  yum:
+    name: MySQL-python
+    state: latest
+
+- name: Set the local root password
+  mysql_user:
+    user: root 
+    password: "{{ mariadb_root_password }}"
+    host: "localhost"
+
+- name: Delete root MariaDB user for remote logins
+  mysql_user: 
+    user: root
+    host: "{{ ansible_fqdn }}"
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Delete anonymous MariaDB user
+  mysql_user: 
+    user: ""
+    host: "{{ item }}"
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+  loop:
+    - "{{ ansible_fqdn }}"
+    - localhost
+
+- name: Delete the test database
+  mysql_db: 
+    db: test
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"

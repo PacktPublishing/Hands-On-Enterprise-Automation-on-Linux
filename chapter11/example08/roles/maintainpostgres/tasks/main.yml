@@ -1,0 +1,7 @@
+---
+- name: Manually insert data into the creditcard table
+  postgresql_query:
+    db: AdventureWorks
+    query: INSERT INTO sales.creditcard ( creditcardid, cardtype, cardnumber, expmonth, expyear ) VALUES ( 0, 'Visa', '0000000000000000', '11', '2019' );
+  become_user: postgres
+  become: yes

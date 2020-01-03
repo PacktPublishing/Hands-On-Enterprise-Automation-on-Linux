@@ -1,0 +1,13 @@
+---
+- name: Deploy and customize an Apache configuration
+  hosts: localhost
+  become: true
+
+  vars:
+    docroot: "/var/www/myexample"
+
+  tasks:
+    - name: Copy across and populate the template configuration
+      template:
+        src: templates/vhost.conf.j2
+        dest: /etc/apache2/sites-available/my-vhost.conf

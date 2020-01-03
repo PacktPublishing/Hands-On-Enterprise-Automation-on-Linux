@@ -1,0 +1,16 @@
+---
+- name: Add required users to Linux servers
+  user:
+    name: johndoe
+    comment: John Doe
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    password: "{{ johndoepw | password_hash('sha512') }}"
+
+- name: Add user's SSH public key
+  authorized_key:
+    user: johndoe
+    state: present
+    key: "{{ lookup('file', 'files/johndoe_id_rsa.pub') }}"
+

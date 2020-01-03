@@ -1,0 +1,10 @@
+---
+- name: Prune Directory
+  hosts: all
+  become: yes
+  vars:
+    max_age: "5d"
+    target_dir: "/var/lib/appdata"
+
+  roles:
+    - pruneappdata

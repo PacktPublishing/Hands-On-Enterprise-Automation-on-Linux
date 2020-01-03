@@ -1,0 +1,29 @@
+---
+- name: Get PID's of running processes matching {{ procname }}
+  pids:
+    name: "{{ procname }}"
+  register: process_ids
+
+- name: Attempt to kill processes nicely
+  shell: "kill {{ item }}"
+  loop:
+    "{{ process_ids.pids }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Wait for processes to exit
+  wait_for:
+    path: "/proc/{{ item }}"
+    timeout: 5
+    state: absent
+  loop: 
+    "{{ process_ids.pids }}"
+  ignore_errors: yes
+  register: exit_results
+
+- name: Forcefully kill stuck processes
+  shell: "kill -9 {{ item.item }}"
+  loop:
+    "{{ exit_results.results | selectattr('failed') | list }}"
+  loop_control:
+    label: "{{ item.item }}"

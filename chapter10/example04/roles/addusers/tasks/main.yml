@@ -1,0 +1,6 @@
+---
+- name: Add required users to Linux servers
+  user:
+    name: johndoe
+    state: absent
+

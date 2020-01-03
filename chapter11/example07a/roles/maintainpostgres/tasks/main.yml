@@ -1,0 +1,8 @@
+---
+- name: Perform a VACUUM on the sales.credit_card table
+  postgresql_query:
+    db: AdventureWorks
+    query: VACUUM sales.creditcard
+    autocommit: yes
+  become_user: postgres
+  become: yes

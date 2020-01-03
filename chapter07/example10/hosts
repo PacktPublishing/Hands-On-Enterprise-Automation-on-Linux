@@ -1,0 +1,8 @@
+[dbservers]
+ubuntu-testhost
+
+[dbservers:vars]
+mariadb_port=3307
+mariadb_bind_address=0.0.0.0
+mariadb_max_binlog_size=250M
+

@@ -1,0 +1,13 @@
+[centos-os]
+name=CentOS-os
+baseurl=https://pulp.example.com/pulp/repos/{{ centos_os_relurl }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+sslverify=0
+
+[centos-updates]
+name=CentOS-updates
+baseurl=https://pulp.example.com/pulp/repos/{{ centos_updates_relurl }}
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+sslverify=0

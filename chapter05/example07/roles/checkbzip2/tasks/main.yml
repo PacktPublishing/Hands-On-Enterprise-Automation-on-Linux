@@ -1,0 +1,10 @@
+---
+- name: Check for the existence of bzip2
+  stat:
+    path: /bin/bzip2
+  register: bzip2result
+  failed_when: bzip2result.stat.exists == false
+
+- name: Display a message if bzip2 exists
+  debug:
+    msg: bzip2 installed.

@@ -1,0 +1,7 @@
+---
+- name: Add required users to Linux servers
+  user:
+    name: johndoe
+    comment: John Doe
+    shell: /bin/bash
+

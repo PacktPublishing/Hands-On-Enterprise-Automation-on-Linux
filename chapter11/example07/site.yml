@@ -1,0 +1,7 @@
+---
+- name: Maintain PostgreSQL database
+  hosts: all
+  become: yes
+
+  roles:
+    - maintainpostgres

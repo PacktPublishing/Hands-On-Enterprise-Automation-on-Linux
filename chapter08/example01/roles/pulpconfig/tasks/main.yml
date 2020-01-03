@@ -1,0 +1,19 @@
+---
+- name: Create a directory to back up any existing REPO configuration
+  file:
+    path: /etc/yum.repos.d/originalconfig
+    state: directory
+
+- name: Move aside any existing REPO configuration
+  shell: mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/originalconfig
+
+- name: Copy across and populate Pulp templated config
+  template:
+    src: templates/centos-pulp.repo.j2
+    dest: /etc/yum.repos.d/centos-pulp.repo
+    owner: root
+    group: wheel
+
+- name: Clean out yum database
+  shell: "yum clean all"
+

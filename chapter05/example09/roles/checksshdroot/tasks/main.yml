@@ -1,0 +1,9 @@
+---
+- name: Check root login setting in sshd_config
+  command: grep -e "^PermitRootLogin no" /etc/ssh/sshd_config
+  register: grepresult
+  failed_when: grepresult.rc != 0
+
+- name: Display a message if root login is disabled
+  debug:
+    msg: root login disabled for SSH

@@ -1,0 +1,14 @@
+---
+- name: 3.1.2 Ensure packet redirect sending is disabled (Scored - L1S L1W)
+  sysctl:
+    name: "{{ item.paramname }}"
+    value: "{{ item.paramvalue }}"
+    reload: yes
+    ignoreerrors: yes
+    sysctl_set: yes
+    state: present
+  loop:
+    - { paramname: net.ipv4.conf.all.send_redirects, paramvalue: 0 }
+    - { paramname: net.ipv4.conf.default.send_redirects, paramvalue: 0 }
+  notify:
+    - Flush IPv4 routes

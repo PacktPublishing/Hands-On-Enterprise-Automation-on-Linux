@@ -1,0 +1,14 @@
+---
+- name: Copy MariaDB configuration files to host
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - { src: 'templates/mariadb.cnf.j2', dest: '/etc/mysql/mariadb.cnf' }
+    - { src: 'templates/50-server.cnf.j2', dest: '/etc/mysql/mariadb.conf.d/50-server.cnf' }
+  notify:
+    - Restart MariaDB Server
+

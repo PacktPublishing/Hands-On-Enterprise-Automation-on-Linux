@@ -1,0 +1,7 @@
+---
+- name: Run example roles
+  hosts: all
+  become: yes
+
+  roles:
+    - checkbzip2

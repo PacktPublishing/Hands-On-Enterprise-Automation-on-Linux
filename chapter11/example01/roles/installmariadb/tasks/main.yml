@@ -1,0 +1,38 @@
+---
+- name: Populate MariaDB yum template on target host
+  template:
+    src: templates/mariadb.repo.j2
+    dest: /etc/yum.repos.d/mariadb.repo
+    owner: root
+    group: root
+    mode: '0644'
+  register: mariadbtemplate
+
+- name: Clean out yum cache only if template was changed
+  shell: "yum clean all"
+  when: mariadbtemplate.changed
+
+- name: Install MariaDB packages
+  yum:
+    name:
+      - MariaDB-server
+      - galera
+      - MariaDB-client
+      - MariaDB-shared
+      - MariaDB-backup
+      - MariaDB-common
+    state: latest
+
+- name: Ensure mariadb-server service starts on boot and is started now
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Open firewall port for MariaDB server
+  firewalld:
+    service: mysql
+    permanent: yes
+    state: enabled
+    immediate: yes
+

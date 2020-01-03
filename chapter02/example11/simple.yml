@@ -1,0 +1,13 @@
+---
+- name: Simple playbook
+  hosts: localhost
+  become: false
+
+  tasks:
+    - name: Show a message
+      debug:
+        msg: "{{ ansible_distribution }}"
+    - name: Touch a file
+      file:
+        path: /tmp/foo
+        state: touch

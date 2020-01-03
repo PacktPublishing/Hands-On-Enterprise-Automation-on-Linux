@@ -1,0 +1,11 @@
+default isolinux/menu.c32
+prompt 0
+timeout 120
+
+menu title --------- Enterprise Automation Boot Menu ---------
+
+label 1
+menu label ^1. Install CentOS 7.6 from local repo
+kernel centos7/vmlinuz
+append initrd=centos7/initrd.img method=http://192.168.201.1/centos7 devfs=nomount ip=dhcp inst.vnc inst.vncpassword=password
+

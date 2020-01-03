@@ -1,0 +1,18 @@
+---
+- name: Create a directory to back up any existing REPO configuration
+  file:
+    path: /etc/apt/originalconfig
+    state: directory
+
+- name: Move existing config into backup directory
+  shell: mv /etc/apt/sources.list /etc/apt/originalconfig
+
+- name: Copy across and populate Pulp templated config
+  template:
+    src: templates/sources.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    group: root
+
+- name: Clean out dpkg database
+  shell: "apt-get clean"

@@ -1,0 +1,10 @@
+---
+- name: Run example roles
+  hosts: all
+  become: yes
+
+  vars:
+    ntpserver: time.example.com
+
+  roles:
+    - templatentp

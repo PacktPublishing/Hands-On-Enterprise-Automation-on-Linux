@@ -1,0 +1,36 @@
+---
+- name: Install PostgreSQL Ansible support packages
+  apt:
+    name: python-psycopg2
+    state: latest
+
+- name: Create production database
+  postgresql_db:
+    name: production
+    state: present
+  become_user: postgres
+
+- name: Add produser account to database
+  postgresql_user:
+    db: production
+    name: produser
+    password: securepw
+    priv: ALL
+    state: present
+  become_user: postgres
+
+- name: Grant produser access to the production database over the local network
+  postgresql_pg_hba:
+    dest: /etc/postgresql/11/main/pg_hba.conf
+    contype: host
+    users: produser
+    source: 192.168.81.0/24
+    databases: production
+    method: md5
+
+- name: Ensure PostgreSQL is listening for remote connections
+  lineinfile:
+    dest: /etc/postgresql/11/main/postgresql.conf
+    regexp: '^listen_addresses ='
+    line: listen_addresses = '*'
+  notify: Restart PostgreSQL

@@ -1,0 +1,9 @@
+---
+- name: Install cloud-init and docker
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cloud-init
+    - docker.io
+

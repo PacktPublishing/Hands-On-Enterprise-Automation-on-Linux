@@ -1,0 +1,24 @@
+---
+- name: Install cloud-init and docker
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cloud-init
+    - docker.io
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install the epel-release package
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install cloud-init and docker
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cloud-init
+    - docker
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

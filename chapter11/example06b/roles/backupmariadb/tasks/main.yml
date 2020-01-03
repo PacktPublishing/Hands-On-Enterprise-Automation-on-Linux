@@ -1,0 +1,12 @@
+---
+- name: Define a variable for the backup file name
+  set_fact:
+    db_filename: "/tmp/{{ inventory_hostname }}-backup-{{ ansible_date_time.date }}.sql"
+
+- name: Back up the database
+  shell: "mysqldump -u root --password={{ mariadb_root_password }} --all-databases --single-transaction --lock-tables=false --quick > {{ db_filename }}"
+
+- name: Copy the backed up data for archival
+  fetch:
+    src: "{{ db_filename }}"
+    dest: "/backup"

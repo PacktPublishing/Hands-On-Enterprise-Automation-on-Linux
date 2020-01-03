@@ -1,0 +1,13 @@
+---
+- name: Simple playbook
+  hosts: all
+  become: false
+
+  tasks:
+    - name: Show a message
+      debug:
+        msg: "Hello world!"
+    - name: Touch a file
+      file:
+        path: /tmp/foo
+        state: touch

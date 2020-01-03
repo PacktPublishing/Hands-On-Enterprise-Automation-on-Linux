@@ -1,0 +1,11 @@
+---
+- name: Copy SSHd configuration to target host
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart SSH daemon
+

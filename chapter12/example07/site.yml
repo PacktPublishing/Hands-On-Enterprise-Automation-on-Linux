@@ -1,0 +1,7 @@
+---
+- name:  Kill processes in a controlled manner
+  hosts: all
+  become: yes
+
+  roles:
+    - killproc

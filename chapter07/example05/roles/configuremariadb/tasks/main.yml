@@ -1,0 +1,13 @@
+---
+- name: Reconfigure MariaDB Server to listen for external connections
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: '^bind-address\s+='
+    line: 'bind-address = 0.0.0.0'
+    insertafter: '^\[mysqld\]'
+    state: present
+
+- name: Restart MariaDB to pick up configuration changes
+  service:
+    name: mariadb
+    state: restarted

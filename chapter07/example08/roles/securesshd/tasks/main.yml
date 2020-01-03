@@ -1,0 +1,22 @@
+---
+- name: Copy SSHd configuration to target host
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart SSH daemon
+
+- name: Perform an additional modification
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^\# Configured by Ansible'
+    line: '# Configured by Ansible on {{ inventory_hostname }}'
+    insertbefore: BOF
+    state: present
+  notify:
+    - Restart SSH daemon
+
+

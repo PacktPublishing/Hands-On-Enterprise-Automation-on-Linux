@@ -1,0 +1,5 @@
+---
+- name: Ensure bzip2 is installed
+  yum:
+    name: bzip2
+    state: present

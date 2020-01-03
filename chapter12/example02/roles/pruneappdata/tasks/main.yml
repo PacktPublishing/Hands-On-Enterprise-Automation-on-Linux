@@ -1,0 +1,33 @@
+---
+- name: Obtain free disk space for {{ target_dir }}
+  shell: df -h "{{ target_dir }}" | tail -n 1 | awk {'print $5 '}  | sed 's/%//g'
+  register: dfresult
+  changed_when: false
+
+- name: Run file pruning only if disk usage is greater than 90 percent
+  block:
+
+  - name: Find all files older than {{ max_age }} in {{ target_dir }}
+    find:
+      paths: "{{ target_dir }}"
+      age: "{{ max_age }}"
+      recurse: yes
+    register: prune_list
+
+  - name: Print file list for auditing purposes
+    debug:
+      msg: "{{ item.path }}"
+    loop:
+      "{{ prune_list.files }}"
+    loop_control:
+      label: "{{ item.path }}"
+
+  - name: Prune {{ target_dir }}
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    loop:
+      "{{ prune_list.files }}"
+    loop_control:
+      label: "{{ item.path }}"
+  when: dfresult.stdout|int > 90

@@ -1,0 +1,24 @@
+---
+- name: Copy new MOTD file, and backup any existing file if it exists
+  copy:
+    src: files/motd
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+- name: Copy across new chrony configuration, and backup any existing file if it exists
+  copy:
+    src: files/chrony.conf
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+- name: Install docker-compose 1.18.0
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.18.0/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+    owner: root
+    group: root

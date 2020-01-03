@@ -1,0 +1,7 @@
+---
+- name: Secure SSH configuration
+  hosts: all
+  become: yes
+
+  roles:
+    - securesshd

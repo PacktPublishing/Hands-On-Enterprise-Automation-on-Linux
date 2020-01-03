@@ -1,0 +1,27 @@
+---
+- name: Populate PostgreSQL yum template on target host
+  template:
+    src: templates/pgdg.list.j2
+    dest: /etc/apt/sources.list.d/pgdg.list
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add key for PostgreSQL packages
+  apt_key: 
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present 
+
+- name: Install PostgreSQL 11 packages
+  apt:
+    name:
+      - postgresql-11
+      - postgresql-client-11
+    state: latest
+    update_cache: yes
+
+- name: Ensure PostgreSQL service is installed and started at boot time
+  service:
+    name: postgresql
+    state: started
+    enabled: yes

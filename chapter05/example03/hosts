@@ -1,0 +1,7 @@
+[imagesetup]
+192.168.81.141
+
+[imagesetup:vars]
+ansible_user=imagebuild
+ansible_password=password
+ansible_sudo_pass=password

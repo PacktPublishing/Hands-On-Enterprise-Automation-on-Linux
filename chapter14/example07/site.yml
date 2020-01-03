@@ -1,0 +1,7 @@
+---
+- name: Implement EL7 CIS benchmark
+  hosts: all
+  become: yes
+
+  roles:
+    - RHEL7-CIS

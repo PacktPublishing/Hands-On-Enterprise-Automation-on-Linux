@@ -1,0 +1,18 @@
+---
+- name: Uninstall MariaDB Server on Ubuntu or Debian
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - mariadb-server
+    - mariadb-client
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Uninstall MariaDB Server on CentOS or RHEL
+  yum:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - mariadb-server
+    - mariadb
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

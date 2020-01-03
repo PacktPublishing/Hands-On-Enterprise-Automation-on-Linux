@@ -1,0 +1,5 @@
+[routers]
+router-testhost
+
+[routers:vars]
+rhel7cis_is_router=true

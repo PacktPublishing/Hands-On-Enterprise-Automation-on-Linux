@@ -1,0 +1,16 @@
+---
+- name: 5.2.8 Ensure SSH root login is disabled (Scored - L1S L1W)
+  lineinfile:
+    state: present
+    dest: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify: Restart sshd
+
+- name: 5.2.9 Ensure SSH PermitEmptyPasswords is disabled (Scored - L1S L1W)
+  lineinfile:
+    state: present
+    dest: /etc/ssh/sshd_config
+    regexp: '^PermitEmptyPasswords'
+    line: 'PermitEmptyPasswords no'
+  notify: Restart sshd

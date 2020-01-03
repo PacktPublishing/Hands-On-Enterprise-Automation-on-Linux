@@ -1,0 +1,7 @@
+---
+- name: Backup MariaDB data
+  hosts: all
+  become: yes
+
+  roles:
+    - backupmariadb 

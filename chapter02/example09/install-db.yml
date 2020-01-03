@@ -1,0 +1,10 @@
+---
+- name: Install MariaDB Server
+  hosts: localhost
+  become: true
+
+  vars:
+    mariadb_root_password: cambiame
+
+  roles:
+    - mrlesmithjr.mariadb-mysql

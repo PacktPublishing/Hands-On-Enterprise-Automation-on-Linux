@@ -1,0 +1,7 @@
+[ipaclients]
+centos-testhost
+
+[ipaclients:vars]
+ipaadmin_password=password
+ipaserver_domain=example.com
+ipaserver_realm=EXAMPLE.COM

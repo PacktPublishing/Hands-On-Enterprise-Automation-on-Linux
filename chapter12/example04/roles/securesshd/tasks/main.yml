@@ -1,0 +1,13 @@
+---
+- name: Copy SSHd configuration to target host
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart SSH daemon
+  register: template_result
+  failed_when: (template_result.changed and ansible_check_mode == True) or template_result.failed
+

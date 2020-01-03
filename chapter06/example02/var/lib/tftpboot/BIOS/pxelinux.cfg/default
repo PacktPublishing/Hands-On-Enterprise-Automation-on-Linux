@@ -1,0 +1,10 @@
+default isolinux/menu.c32
+prompt 0
+timeout 120
+
+menu title --------- Enterprise Automation Boot Menu ---------
+
+label 1
+menu label ^1. Install Ubuntu Server 18.04 from local repo
+kernel ubuntu1804/linux
+append initrd=ubuntu1804/initrd.gz url=http://192.168.201.1/ubuntu-config/ubuntu-unattended.txt vga=normal locale=en_US.UTF-8 console-setup/ask_detect=false console-setup/layoutcode=gb keyboard-configuration/layoutcode=gb mirror/country=manual mirror/http/hostname=192.168.201.1 mirror/http/directory=/ubuntu1804 mirror/http/proxy="" live-installer/net-image=http://192.168.201.1/ubuntu1804/install/filesystem.squashfs netcfg/get_hostname=unassigned-hostname

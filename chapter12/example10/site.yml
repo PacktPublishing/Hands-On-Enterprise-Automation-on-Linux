@@ -1,0 +1,9 @@
+---
+- name: Deploy web server code
+  hosts: all
+  become: yes
+  serial: 2
+  max_fail_percentage: 50
+
+  roles:
+    - deployweb

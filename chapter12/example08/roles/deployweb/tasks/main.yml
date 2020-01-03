@@ -1,0 +1,11 @@
+---
+- name: Deploy new code
+  template:
+    src: templates/web.html.j2
+    dest: /var/www/html/web.html
+  failed_when: inventory_hostname == 'cluster3'
+
+- name: Restart web server
+  service:
+    name: nginx
+    state: restarted

@@ -1,0 +1,14 @@
+---
+- name: Copy SSHd configuration to target host
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Restart SSH daemon
+  service:
+    name: ssh
+    state: restarted
+

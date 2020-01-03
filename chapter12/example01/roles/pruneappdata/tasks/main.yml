@@ -1,0 +1,24 @@
+---
+- name: Find all files older than {{ max_age }} in {{ target_dir }}
+  find:
+    paths: "{{ target_dir }}"
+    age: "{{ max_age }}"
+    recurse: yes
+  register: prune_list
+
+- name: Print file list for auditing purposes
+  debug:
+    msg: "{{ item.path }}"
+  loop:
+    "{{ prune_list.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Prune {{ target_dir }}
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop:
+    "{{ prune_list.files }}"
+  loop_control:
+    label: "{{ item.path }}"

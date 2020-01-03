@@ -1,0 +1,11 @@
+---
+- name: Install Pulp repos and update kernel
+  hosts: all
+  become: yes
+  vars:
+    centos_os_relurl: "centos76-os"
+    centos_updates_relurl: "centos7-07aug19"
+
+  roles:
+    - pulpconfig
+    - updatekernel

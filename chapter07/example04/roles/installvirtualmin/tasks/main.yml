@@ -1,0 +1,11 @@
+---
+- name: download virtualmin install script
+  get_url:
+    url: http://software.virtualmin.com/gpl/scripts/install.sh
+    dest: /root/install.sh
+    mode: 0755
+
+- name: virtualmin install (takes around 10 mins) you can see progress using $ sudo tail -f /root/virtualmin-install.log
+  shell: /root/install.sh --force --hostname {{ inventory_hostname }} --minimal --yes
+  args:
+    chdir: /root

@@ -1,0 +1,16 @@
+---
+- name: Simple playbook
+  hosts: localhost
+  become: false
+
+  vars:
+    message: "Life is beautiful!"
+
+  tasks:
+    - name: Show a message
+      debug:
+        msg: "{{ message }}"
+    - name: Touch a file
+      file:
+        path: /tmp/foo
+        state: touch

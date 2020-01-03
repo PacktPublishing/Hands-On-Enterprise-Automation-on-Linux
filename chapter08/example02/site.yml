@@ -1,0 +1,12 @@
+---
+- name: Install Pulp repos and update kernel
+  hosts: all
+  become: yes
+  vars:
+    ubuntu_os_relurl: "bionic-amd64-08aug19"
+    ubuntu_security_relurl: "bionic-security-amd64-08aug19"
+    ubuntu_updates_relurl: "bionic-updates-amd64-08aug19"
+
+  roles:
+    - pulpconfig
+    - updatekernel

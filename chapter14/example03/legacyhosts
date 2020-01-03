@@ -1,0 +1,5 @@
+[legacyservers]
+legacy-testhost
+
+[legacyservers:vars]
+recommendation_528=false

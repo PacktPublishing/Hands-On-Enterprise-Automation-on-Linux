@@ -1,0 +1,30 @@
+---  
+- name: Install realmd packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - realmd
+    - oddjob
+    - oddjob-mkhomedir
+    - sssd
+    - samba-common
+    - samba-common-tools
+    - adcli
+    - krb5-workstation
+    - openldap-clients
+    - policycoreutils-python
+
+- name: Join the domain
+    shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }}
+    register: command_result
+    ignore_errors: True
+    notify:
+      - Restart sssd
+
+- name: Fail the play when the realm join fails
+    fail: 
+      msg="Realm join failed with this error: {{ command_result.stderr }}"
+    when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
+
+

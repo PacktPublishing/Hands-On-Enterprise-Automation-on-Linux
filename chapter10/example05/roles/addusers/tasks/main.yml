@@ -1,0 +1,10 @@
+---
+- name: Add required users to Linux servers
+  user:
+    name: johndoe
+    state: absent
+
+- name: Clean up user home directory
+  file:
+    path: /home/johndoe
+    state: absent

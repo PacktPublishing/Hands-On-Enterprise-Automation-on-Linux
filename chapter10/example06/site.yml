@@ -1,0 +1,7 @@
+---
+- name: Manage user accounts
+  hosts: all
+  become: yes
+
+  roles:
+    - realmd

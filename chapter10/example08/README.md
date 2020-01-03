@@ -2,7 +2,7 @@
 
 Tested on:
 - CentOS 7.6 or Ubuntu Server 18.04 LTS
-- Ansible 2.7.10
+- Ansible 2.8.4
 
 Run this command:
 

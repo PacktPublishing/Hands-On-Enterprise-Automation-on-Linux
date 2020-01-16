@@ -6,4 +6,4 @@ Tested on:
 
 Run this command:
 
-    ansible --version
+    ansible-playbook simple.yml

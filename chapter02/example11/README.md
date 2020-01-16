@@ -7,3 +7,4 @@ Tested on:
 Run this command:
 
     ansible -m setup localhost
+    ansible-playbook simple.yml

@@ -6,7 +6,4 @@ Tested on:
 
 Run this command:
 
-    ssh-keygen -b 2048 -t rsa -f ~/id_rsa -q -N ''
-    ssh-copy-id testhost1
-    ssh-copy-id testhost2
-    ansible-playbook -i hosts simple.yml
+    ansible-playbook install-db.yml

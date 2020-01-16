@@ -6,4 +6,5 @@ Tested on:
 
 Run this command:
 
-    ansible -m setup localhost
+    ansible-playbook apache-conf.yml
+    ansible-playbook apache-template-conf.yml

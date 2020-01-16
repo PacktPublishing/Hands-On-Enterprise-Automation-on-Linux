@@ -6,4 +6,4 @@ Tested on:
 
 Run this command:
 
-    ansible-playbook simple.yml
+    ansible-playbook install-db.yml

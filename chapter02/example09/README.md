@@ -7,4 +7,4 @@ Tested on:
 Run this command:
 
     ansible-galaxy install -p roles/ mrlesmithjr.mariadb-mysql
-    ansible-playbook -i hosts simple.yml
+    ansible-playbook install-db.yml

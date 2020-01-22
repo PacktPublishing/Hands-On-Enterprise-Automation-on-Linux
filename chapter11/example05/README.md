@@ -6,6 +6,7 @@ Tested on:
 
 Run this command:
 
+    mkdir -p roles/loadmariadb/files
     cd roles/loadmariadb/files
     git clone https://github.com/datacharmer/test_db.git
     cd ../../..

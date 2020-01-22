@@ -6,6 +6,7 @@ Tested on:
 
 Run this command:
 
+    mkdir roles
     cd roles
     git clone https://github.com/MindPointGroup/RHEL7-CIS.git
     cd ..
